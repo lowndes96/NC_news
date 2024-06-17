@@ -73,6 +73,9 @@ header {
   background-color: grey;
   width: 100%;
 }
+header h1 {
+  margin-left: 50px;
+}
  nav {
   margin-top: 80px;
   background-color: #333;
@@ -84,6 +87,7 @@ header {
  }
 
 a {
+  margin-left: 50px;
   color: white;
   padding: 1em 1.5em;
   text-decoration: none;
@@ -101,15 +105,17 @@ a:hover {
 }
 
 main {
-  margin-top: 150px;
+  margin: auto;
+  margin-top: 115px;
+  width: 90vw;
+
 }
 
+
 .home-main {
-  background-color: #04AA6D;
+  background-color: grey;
   display: flex;
   flex-wrap: wrap;
-  max-width: 90vw;
-  
   gap: 10px;
   gap: 10px 20px;
 }
@@ -117,31 +123,24 @@ main {
 .home-art {
   flex-grow: 2;
   flex-basis: auto;
-  background-color: #dddddd;
+  /* background-color: #dddddd; */
   width: 30vw;
   max-height: 100vh;
-  /* padding: 50px; */
   text-align: center;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  border: 15px solid green;
+  border-bottom: solid 5px  black;
+  border-left: solid 1px  black;;
   overflow: hidden;
 
 }
 .home-art-2 {
   flex-grow: 1;
-  background-color: #dddddd;
+  /* background-color: #dddddd; */
   width: 25vw;
-  max-height: 10vh;
+  max-height: 15vh;
   text-align: center;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  border: 15px solid green;
-  overflow: hidden;
+  border-bottom: solid 5px  black;
+  border-left: solid 1px  black;;
+  overflow:scroll;
 }
 
 
@@ -161,3 +160,7 @@ h5 {
 /* h3 {
   padding-bottom: 0;
 } */
+
+article h3 {
+  line-height: 1em;
+}

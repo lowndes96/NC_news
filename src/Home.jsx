@@ -19,7 +19,7 @@ function Home(){
     <Nav/>
     <main className='home-main'>
     {allArticles.map((article, index) => {
-        if (index < 5) {
+        if (index < 6) {
             const day = Date(article.created_at)
             return <article key={index + 'h-a'} className='home-art'>
                 <img src={article.article_img_url} alt="" />
