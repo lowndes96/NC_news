@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import {getArticle} from './api'
+import ArticleComments from "./articleComments"
 
 function SingleArticle({currentArticle}){
     const [displayArticle, setDisplayArticle] = useState([])
     const [haveArticle, setHaveArticle] = useState(false)
+    const [commentsVisable, setCommentsVisable] = useState(false)
 
     useEffect(() => {
         getArticle(currentArticle).then((data) => {
@@ -12,6 +14,10 @@ function SingleArticle({currentArticle}){
         })
         .catch((err) => {console.log(err)})
     },[currentArticle, haveArticle])
+
+    function HandleCommentsVisable(){
+        setCommentsVisable(!commentsVisable)
+    }
 
     if (haveArticle){
         const day = Date(displayArticle.created_at)
@@ -32,6 +38,12 @@ function SingleArticle({currentArticle}){
                 <p>{displayArticle.body}</p>
             </body>
         </article>
+        <section>
+            <button>upvote</button>
+            <button>downvote</button>
+            <button onClick={()=> {HandleCommentsVisable()}}>{commentsVisable ?  'hide' : 'show'} Comments</button>
+            </section>
+        {commentsVisable ? <ArticleComments currentArticle={currentArticle}/> : null}    
     </main>
     }
     else {
@@ -41,6 +53,7 @@ function SingleArticle({currentArticle}){
                 <h1>loading article....</h1>
             </header>
         </article>
+
         </main>
     }
 
