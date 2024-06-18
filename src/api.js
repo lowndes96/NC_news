@@ -16,3 +16,9 @@ export const getArticles = () => {
         return res.data
     })
 }
+
+export const getArticle = (article_id) => {
+    return myApi.get(`/articles/${article_id}`).then((res) => {
+        return res.data
+    })
+}
