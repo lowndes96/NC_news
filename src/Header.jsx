@@ -1,7 +1,7 @@
 
 
 function Header(){
-    return     <header>
+    return     <header className="header-bar">
     <h1>NC - NEWS</h1>
     </header>
 
