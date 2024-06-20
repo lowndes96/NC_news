@@ -10,7 +10,6 @@ function ArticleComments({ currentArticle }) {
     });
   }, []);
 
-  console.log(allComments)
 
   if (allComments.length > 1) {
     return (

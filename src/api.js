@@ -6,12 +6,15 @@ const myApi = axios.create({
   
 
 export const getTopics = () => {
+
     return myApi.get(`/topics`).then((res) => {
+        console.log('getting topics')
         return res.data
     })
 }
 
 export const getArticles = () => {
+    console.log('getting articles')
     return myApi.get(`/articles`).then((res) => {
         return res.data
     })
@@ -26,5 +29,11 @@ export const getArticle = (article_id) => {
 export const getArticleComments = (article_id) => {
     return myApi.get(`/articles/${article_id}/comments`).then((res) => {
         return res.data.comments
+    })
+}
+
+export const patchArticleVotes = (article_id,voteObject) => {
+    return myApi.patch(`/articles/${article_id}`,voteObject).then((res) => {
+        return res.data.updatedArticle
     })
 }
