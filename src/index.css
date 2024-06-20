@@ -213,6 +213,11 @@ article h3 {
   place-self: center;
 }
 
+.clicked-col {
+  background-color: #04AA6D;
+}
+
+
 /* comments section  */
 
 .commenter {

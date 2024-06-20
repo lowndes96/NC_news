@@ -6,12 +6,15 @@ function SingleArticle({ currentArticle }) {
   const [displayArticle, setDisplayArticle] = useState([]);
   const [haveArticle, setHaveArticle] = useState(false);
   const [commentsVisable, setCommentsVisable] = useState(false);
+  const [voteCount, setVoteCount] = useState(null);
+  const [voteClick, setVoteClick] = useState(null);
 
   useEffect(() => {
     getArticle(currentArticle)
       .then((data) => {
         setHaveArticle(true);
         setDisplayArticle(data.article);
+        setVoteCount(data.article.votes);
       })
       .catch((err) => {
         console.log(err);
@@ -23,13 +26,21 @@ function SingleArticle({ currentArticle }) {
   }
 
   function HandleVote(e) {
-    console.log('in vote handler');
-    const voteObject = { inc_votes: e.target.value };
-    patchArticleVotes(currentArticle, voteObject).then((data) => {
-      console.log(data, 'patch vote data');
-      //optemistic render needs adding - look @ notes
-    })
-    .catch((err) => {console.log(err)})
+    if (voteClick !== e.target.value ){
+      const voteObject = { inc_votes: e.target.value };
+      setVoteCount(Number(voteCount) + Number(voteObject.inc_votes));
+      patchArticleVotes(currentArticle, voteObject)
+        .then((data) => {
+          setVoteCount(data.votes);
+          setVoteClick(e.target.value);
+          console.log(voteClick)
+        })
+        .catch((err) => {
+          console.log(err);
+          setVoteCount(Number(voteCount) - Number(voteObject.inc_votes));
+        });
+    }
+
   }
 
   if (haveArticle) {
@@ -45,7 +56,7 @@ function SingleArticle({ currentArticle }) {
           <section>
             <h3>Topic: {displayArticle.topic}</h3>
             <h4>comments: {displayArticle.comment_count}</h4>
-            <h4>Votes: {displayArticle.votes}</h4>
+            <h4>Votes: {voteCount}</h4>
           </section>
           <img src={displayArticle.article_img_url} alt="" />
           <body>
@@ -58,6 +69,7 @@ function SingleArticle({ currentArticle }) {
               HandleVote(e);
             }}
             value={1}
+            className={voteClick==='1' ? 'clicked-col' : 'unclicked-col'}
           >
             upvote
           </button>
@@ -66,6 +78,7 @@ function SingleArticle({ currentArticle }) {
               HandleVote(e);
             }}
             value={-1}
+            className={voteClick==='-1' ? 'clicked-col' : 'unclicked-col'}
           >
             downvote
           </button>

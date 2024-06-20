@@ -6,12 +6,15 @@ const myApi = axios.create({
   
 
 export const getTopics = () => {
+
     return myApi.get(`/topics`).then((res) => {
+        console.log('getting topics')
         return res.data
     })
 }
 
 export const getArticles = () => {
+    console.log('getting articles')
     return myApi.get(`/articles`).then((res) => {
         return res.data
     })
