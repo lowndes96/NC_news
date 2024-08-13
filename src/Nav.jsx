@@ -15,7 +15,7 @@ function Nav() {
     return <nav>
             <Link to='/'className="active" >Home</Link>
         {allTopics.map((topic) => {
-            return <Link to='/by-topic' key={topic.slug}>{topic.slug}</Link>
+            return <Link to= {`/topic/${topic.slug}`} key={topic.slug}>{topic.slug}</Link>
         })}
     </nav>
 }

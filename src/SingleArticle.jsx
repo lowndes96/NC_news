@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getArticle, patchArticleVotes } from './api';
 import ArticleComments from './articleComments';
+import AddComment from './addComment';
 
 function SingleArticle({ currentArticle }) {
   const [displayArticle, setDisplayArticle] = useState([]);
@@ -8,6 +9,7 @@ function SingleArticle({ currentArticle }) {
   const [commentsVisable, setCommentsVisable] = useState(false);
   const [voteCount, setVoteCount] = useState(null);
   const [voteClick, setVoteClick] = useState(null);
+
 
   useEffect(() => {
     getArticle(currentArticle)
@@ -33,14 +35,12 @@ function SingleArticle({ currentArticle }) {
         .then((data) => {
           setVoteCount(data.votes);
           setVoteClick(e.target.value);
-          console.log(voteClick)
         })
         .catch((err) => {
           console.log(err);
           setVoteCount(Number(voteCount) - Number(voteObject.inc_votes));
         });
     }
-
   }
 
   if (haveArticle) {
@@ -90,9 +90,12 @@ function SingleArticle({ currentArticle }) {
             {commentsVisable ? 'hide' : 'show'} Comments
           </button>
         </section>
-        {commentsVisable ? (
-          <ArticleComments currentArticle={currentArticle} />
-        ) : null}
+        {commentsVisable ? 
+          <>
+            <ArticleComments currentArticle={currentArticle} />
+            <AddComment currentArticle={currentArticle}/>
+            </>
+         : null}
       </main>
     );
   } else {

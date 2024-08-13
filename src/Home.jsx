@@ -13,7 +13,6 @@ function Home({setCurrentArticle}){
     useEffect(() => {
         setHomeLoaded(false)
         getArticles().then(({articles}) => {
-            console.log('home loaded')
             setAllArticles(articles)
             setHomeLoaded(true)
         })
@@ -28,7 +27,7 @@ function Home({setCurrentArticle}){
 
     return <>
     <main className='home-main'>
-        {homeLoaded ? null : <Oval></Oval>}
+        {homeLoaded ? null : <Oval/>}
     {allArticles.map((article, index) => {
         if (index < 6) {
             const day = Date(article.created_at)
